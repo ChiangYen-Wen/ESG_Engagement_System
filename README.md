@@ -135,6 +135,6 @@ pyinstaller --add-data "templates;templates" --add-data "ESG_DB.accdb;." --onefi
 
 
 
-歡迎 Fork 與 PR，一起使系統更強大！🚀
+歡迎 Fork 與 PR，一起讓工作更便利！🚀
 
 
