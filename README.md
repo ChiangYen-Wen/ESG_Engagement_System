@@ -9,7 +9,7 @@
 
 ✅ **不需要安裝 Python 環境：可直接在企業內部 Windows 電腦上運行**
 
-✅ **記住檔案與資料庫要放在同一層資料夾**
+✅ **範例連結：https://drive.google.com/drive/folders/1dNrKkeXgRzzUz3KOg2xZah6Sdtdcdc6q?usp=drive_link**
 
 ---
 
