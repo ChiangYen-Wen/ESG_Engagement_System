@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>報告詳細內容</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            width: 20%;
+        }
+        .back-link, .action-button {
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .back-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .edit-form, .delete-form {
+            display: inline;
+        }
+        .edit-form button, .delete-form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin-right: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .edit-form button:hover {
+            background-color: #0056b3;
+        }
+        .delete-form button {
+            background-color: #dc3545;
+        }
+        .delete-form button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>報告詳細內容</h1>
+
+    {% if report %}
+        <table>
+            {% for key, value in report.items() %}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="action-button">
+            <!-- 修改按鈕 -->
+            <form method="get" action="/edit" class="edit-form">
+                <input type="hidden" name="stock_id" value="{{ report.stock_id }}">
+                <input type="hidden" name="stock_name" value="{{ report.stock_name }}">
+                <input type="hidden" name="analyst" value="{{ report.analyst }}">
+                <button type="submit">✏️ 修改原先狀況</button>
+            </form>
+
+            <!-- 刪除按鈕 -->
+            <form method="post" action="/delete" class="delete-form" onsubmit="return confirm('確定要刪除這筆資料嗎？')">
+                <input type="hidden" name="stock_id" value="{{ report.stock_id }}">
+                <input type="hidden" name="stock_name" value="{{ report.stock_name }}">
+                <input type="hidden" name="analyst" value="{{ report.analyst }}">
+                <button type="submit">🗑️ 刪除這筆資料</button>
+            </form>
+        </div>
+
+    {% else %}
+        <p style="color: red;">查無此筆資料，請返回查詢頁面。</p>
+    {% endif %}
+
+    <a class="back-link" href="{{ url_for('index') }}">← 返回查詢頁面</a>
+</body>
+</html>
