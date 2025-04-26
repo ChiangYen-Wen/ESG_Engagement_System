@@ -26,12 +26,18 @@
 - `app.py` — 後端程式，位於專案根目錄
 - `templates/index.html` — 主頁（查詢＋新增），放在 `templates` 子資料夾
 - `templates/detail.html` — 報告詳細內容頁面
-- `templates/edit.html` — 報告編輯頁面（尚未啟用）
+- `templates/edit.html` — 報告編輯頁面
 - `ESG_DB.accdb` — Access 資料庫檔案，放在專案根目錄
 
+  
 **注意**：
 - HTML 檔案必須放在 `templates/` 目錄內，Flask 才能正確載入。
 - **`ESG_DB.accdb` 必須自備，並且和 `app.py` 放在同一層資料夾**，否則系統無法連線資料庫。
+- `外層資料夾截圖畫面如下:
+- ![螢幕擷取畫面 2025-04-26 190502](https://github.com/user-attachments/assets/9fb9e076-da1e-4817-bc60-ae371dc3bde0)
+- `內層資料夾截圖畫面如下:
+- ![螢幕擷取畫面 2025-04-26 190247](https://github.com/user-attachments/assets/f718cf43-9094-4b74-ab5e-f5db04af09ee)
+
 
 ---
 
