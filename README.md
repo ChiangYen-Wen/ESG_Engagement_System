@@ -96,6 +96,10 @@ pyinstaller --add-data "templates;templates" --add-data "ESG_DB.accdb;." --onefi
 - 將 `.exe` 檔案上傳到 Google Drive、Dropbox、OneDrive 等雲端硬碟，並在 GitHub ReadMe 中提供下載連結。
 - 或者，壓縮成 .zip 檔案後，使用 GitHub Release 功能發佈大檔案。
 
+✅ 具體流程圖如下：
+![ChatGPT Image 2025年4月26日 下午07_21_27](https://github.com/user-attachments/assets/91aa5991-ae76-4657-917b-df6dedd02759)
+
+
 ---
 
 ## 🔍 功能簡介
