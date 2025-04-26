@@ -48,7 +48,7 @@ pip install flask pyodbc
 python app.py
 ```
 
-會自動打開瀏覽器，連線至 [http://127.0.0.1:5000](http://127.0.0.1:5000)
+會自動打開瀏覽器，連線至 [http://127.0.0.1:5000]
 
 ### 3. 啟動步驟（使用打包成 .exe 版本）
 
@@ -97,7 +97,7 @@ pyinstaller --add-data "templates;templates" --add-data "ESG_DB.accdb;." --onefi
 
 - 顯示完整的報告資訊（日期、股票、問答內容等）
 
-### ✏🗑️ 刪除資訊
+### 🗑️ 刪除資訊
 
 - 可選定特定的ESG報告進行刪除
 
