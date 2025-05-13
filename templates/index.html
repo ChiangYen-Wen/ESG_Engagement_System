@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ESG 報告系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .panel {
+            width: 48%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px #ddd;
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 6px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        input, select, textarea {
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        button {
+            padding: 6px 12px;
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>ESG 報告系統</h1>
+
+    {% if success == 'add' %}
+        <p style="color: green;">✅ 成功新增一筆報告！</p>
+    {% elif success == 'delete' %}
+        <p style="color: red;">🗑️ 成功刪除一筆報告！</p>
+    {% elif success == 'update' %}
+        <p style="color: blue;">✏️ 成功更新一筆報告！</p>
+    {% endif %}
+
+    <div class="container">
+        <!-- 🔍 查詢區 -->
+        <div class="panel">
+            <h2>查詢報告</h2>
+            <form method="post">
+                <label>股票代號：</label>
+                <select name="stock_id">
+                    <option value="">（不選）</option>
+                    {% for s in stock_ids %}
+                        <option value="{{ s }}">{{ s }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>分析師：</label>
+                <select name="analyst">
+                    <option value="">（不選）</option>
+                    {% for a in analysts %}
+                        <option value="{{ a }}">{{ a }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>目的：</label>
+                <select name="purpose">
+                    <option value="">（不選）</option>
+                    {% for p in purposes %}
+                        <option value="{{ p }}">{{ p }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>日期（起）：</label>
+                <input type="date" name="date_start" value="{{ request.form.date_start }}">
+
+                <label>日期（迄）：</label>
+                <input type="date" name="date_end" value="{{ request.form.date_end }}">
+
+                <button type="submit">搜尋</button>
+            </form>
+
+            {% if results %}
+                <h3>搜尋結果：</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="5">點擊查看詳細內容</th>
+                        </tr>
+                        <tr>
+                            <th>股票代號</th>
+                            <th>股票名稱</th>
+                            <th>分析師</th>
+                            <th>目的</th>
+                            <th>ESG分類</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                        <tr>
+                            <td colspan="5">
+                                <a href="/detail?id={{ row[0] }}">
+                                    {{ row[1] }}｜{{ row[2] }}｜{{ row[3] }}｜{{ row[4] }}｜{{ row[5] }}
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- 📥 匯出 Excel 按鈕 -->
+                <form method="post" action="/export" style="margin-top: 10px;">
+                    <input type="hidden" name="stock_id" value="{{ request.form.stock_id }}">
+                    <input type="hidden" name="analyst" value="{{ request.form.analyst }}">
+                    <input type="hidden" name="purpose" value="{{ request.form.purpose }}">
+                    <input type="hidden" name="date_start" value="{{ request.form.date_start }}">
+                    <input type="hidden" name="date_end" value="{{ request.form.date_end }}">
+                    <button type="submit">📥 匯出 Excel</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <!-- 📝 新增區塊 -->
+        <div class="panel">
+            <h2>新增報告</h2>
+            <form method="post" action="/add">
+                <label>議合日期(必填)：</label>
+                <input type="date" name="date">
+
+                <label>上傳時間(必填)：</label>
+                <input type="datetime-local" name="upload_time">
+
+                <label>股票代號(必填)：</label>
+                <input name="stock_id">
+
+                <label>股票名稱(必填)：</label>
+                <input name="stock_name">
+
+                <label>分析師(必填)：</label>
+                <input name="analyst">
+
+                <label>目的(必填)：</label>
+                <input name="purpose" value="議合">
+
+                <label>ESG分類(必填)：</label>
+                <input name="ESG_category">
+
+                <label>股東會資訊(必填)：</label>
+                <input name="shareholders_meeting" value="無">
+
+                <label>問題(必填)：</label>
+                <textarea name="question"></textarea>
+
+                <label>回答(必填)：</label>
+                <textarea name="answer"></textarea>
+
+                <label>附件路徑(必填)：</label>
+                <input name="files_type">
+
+                <label>備註(必填)：</label>
+                <textarea name="remark"></textarea>
+
+                <button type="submit">新增報告</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
